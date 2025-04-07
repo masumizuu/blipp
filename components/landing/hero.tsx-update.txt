@@ -1,0 +1,23 @@
+// Update the hero section to support dark mode
+<section className="relative bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 pt-16 pb-24 overflow-hidden">
+
+// Update the navigation links to support dark mode
+<Link href="/features" className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">
+  Features
+</Link>
+
+// Update the hero text to support dark mode
+<motion.h1 
+  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight dark:text-white"
+  variants={itemVariants}
+>
+  Connect with friends <span className="text-primary">instantly</span>
+</motion.h1>
+
+<motion.p 
+  className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto lg:mx-0"
+  variants={itemVariants}
+>
+  Experience real-time messaging with a modern, secure, and feature-rich chat application.
+</motion.p>
+

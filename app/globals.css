@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 263 100% 97%; /* magnolia */
+    --foreground: 241 96% 25%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 241 96% 25%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 241 96% 25%;
+
+    --primary: 241 96% 72%; /* medium-slate-blue */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 252 100% 88%; /* periwinkle */
+    --secondary-foreground: 241 96% 25%;
+
+    --muted: 269 49% 90%; /* pale-purple */
+    --muted-foreground: 241 96% 40%;
+
+    --accent: 250 89% 78%; /* tropical-indigo */
+    --accent-foreground: 241 96% 25%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 269 49% 85%;
+    --input: 269 49% 85%;
+    --ring: 241 96% 72%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 241 30% 15%;
+    --foreground: 263 100% 97%;
+
+    --card: 241 30% 18%;
+    --card-foreground: 263 100% 97%;
+
+    --popover: 241 30% 18%;
+    --popover-foreground: 263 100% 97%;
+
+    --primary: 241 70% 60%; /* darker medium-slate-blue */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 252 70% 40%; /* darker periwinkle */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 269 30% 30%; /* darker pale-purple */
+    --muted-foreground: 263 70% 90%;
+
+    --accent: 250 60% 50%; /* darker tropical-indigo */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 241 30% 30%;
+    --input: 241 30% 30%;
+    --ring: 241 70% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+

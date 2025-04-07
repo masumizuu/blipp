@@ -1,0 +1,18 @@
+// Update the section background color to support dark mode
+<section className="py-20 bg-gray-50 dark:bg-gray-900">
+
+// Update the feature card background to support dark mode
+<motion.div 
+  key={index}
+  className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.5, delay: index * 0.1 }}
+  whileHover={{ y: -5 }}
+>
+  <div className="mb-4">{feature.icon}</div>
+  <h3 className="text-xl font-semibold mb-2 dark:text-white">{feature.title}</h3>
+  <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
+</motion.div>
+

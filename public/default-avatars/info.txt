@@ -1,0 +1,8 @@
+# Make sure to add these images to your public/default-avatars directory:
+# - Cowren.png
+# - Catrina.png
+# - Koalby.png
+# - E.T.png
+# - Pandra.png
+# - Sofigya.png
+

@@ -1,0 +1,6 @@
+// Add this import at the top
+import AnimationSettings from "@/components/landing/animation-settings";
+
+// Add this component at the end of the LandingPage component, just before the closing div
+<AnimationSettings />
+

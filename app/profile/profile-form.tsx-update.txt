@@ -1,0 +1,19 @@
+// Add this import at the top
+import { ThemeToggle } from "@/components/theme-toggle";
+
+// Find the "Back to Chat" button and add the ThemeToggle next to it
+// Look for this code:
+<div className="text-center">
+  <Button type="button" variant="outline" onClick={() => router.push("/chat")}>
+    Back to Chat
+  </Button>
+</div>
+
+// And update it to:
+<div className="text-center flex justify-center items-center space-x-2">
+  <Button type="button" variant="outline" onClick={() => router.push("/chat")}>
+    Back to Chat
+  </Button>
+  <ThemeToggle />
+</div>
+

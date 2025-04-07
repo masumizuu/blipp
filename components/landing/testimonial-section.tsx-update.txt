@@ -1,0 +1,52 @@
+// Update the section background color to support dark mode
+<section className="py-20 bg-gray-50 dark:bg-gray-900">
+
+// Update the testimonial card background to support dark mode
+<motion.div 
+  key={currentIndex}
+  initial={{ opacity: 0, x: 100 }}
+  animate={{ opacity: 1, x: 0 }}
+  exit={{ opacity: 0, x: -100 }}
+  transition={{ duration: 0.5 }}
+  className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-lg shadow-lg"
+>
+  <Quote className="h-12 w-12 text-primary/20 mb-6" />
+  
+  <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200 mb-8">
+    "{testimonials[currentIndex].content}"
+  </p>
+  
+  <div className="flex items-center">
+    <div className="mr-4">
+      <Image 
+        src={testimonials[currentIndex].avatar || "/placeholder.svg"} 
+        alt={testimonials[currentIndex].author} 
+        width={60} 
+        height={60} 
+        className="rounded-full"
+      />
+    </div>
+    <div>
+      <h4 className="font-semibold dark:text-white">{testimonials[currentIndex].author}</h4>
+      <p className="text-gray-600 dark:text-gray-400">{testimonials[currentIndex].role}</p>
+    </div>
+  </div>
+</motion.div>
+
+// Update the navigation buttons to support dark mode
+<button 
+  onClick={prevTestimonial}
+  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-white dark:bg-gray-800 p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+  aria-label="Previous testimonial"
+>
+  <ChevronLeft className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+</button>
+
+<button 
+  onClick={nextTestimonial}
+  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-white dark:bg-gray-800 p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+  aria-label="Next testimonial"
+>
+  <ChevronRight className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+</button>
+

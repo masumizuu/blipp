@@ -1,0 +1,15 @@
+// Add this to the POST method in the messages route handler
+// After creating the message:
+
+// Emit socket event for real-time updates
+if ((global as any).io) {
+  (global as any).io.to(conversationId).emit('new-message', message);
+  
+  // Also emit an event to update conversation list
+  (global as any).io.emit('conversation-update', {
+    conversationId,
+    lastMessage: message,
+    updatedAt: new Date()
+  });
+}
+

@@ -1,0 +1,35 @@
+// Add this import
+import { User } from 'lucide-react';
+import { ThemeToggle } from "@/components/theme-toggle";
+
+// Add this button in the header next to the logout button
+<Button 
+  variant="ghost" 
+  size="icon"
+  onClick={() => router.push('/profile')}
+>
+  <User className="h-5 w-5" />
+</Button>
+
+// Find the header section with the buttons and add the ThemeToggle
+// Look for this code:
+<div className="flex space-x-2">
+  <Button variant="ghost" size="icon" onClick={() => setShowUserList(!showUserList)}>
+    <Users className="h-5 w-5" />
+  </Button>
+  <Button variant="ghost" size="icon" onClick={() => signOut({ callbackUrl: "/login" })}>
+    <LogOut className="h-5 w-5" />
+  </Button>
+</div>
+
+// And update it to include the ThemeToggle:
+<div className="flex space-x-2">
+  <Button variant="ghost" size="icon" onClick={() => setShowUserList(!showUserList)}>
+    <Users className="h-5 w-5" />
+  </Button>
+  <ThemeToggle />
+  <Button variant="ghost" size="icon" onClick={() => signOut({ callbackUrl: "/login" })}>
+    <LogOut className="h-5 w-5" />
+  </Button>
+</div>
+

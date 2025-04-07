@@ -1,0 +1,8 @@
+// Add this model to your existing schema.prisma file
+model PasswordReset {
+  email     String   @id
+  token     String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+

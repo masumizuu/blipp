@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  sentMessages     Message[]  @relation("SentMessages")
+  receivedMessages Message[]  @relation("ReceivedMessages")
+  
+  conversationsInitiated Conversation[] @relation("UserOne")
+  conversationsReceived  Conversation[] @relation("UserTwo")
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  userOneId String
+  userTwoId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  userOne   User     @relation("UserOne", fields: [userOneId], references: [id])
+  userTwo   User     @relation("UserTwo", fields: [userTwoId], references: [id])
+  messages  Message[]
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  content        String
+  senderId       String
+  receiverId     String
+  conversationId String
+  read           Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  
+  sender      User         @relation("SentMessages", fields: [senderId], references: [id])
+  receiver    User         @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+}
+
+model PasswordReset {
+  email     String   @id
+  token     String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
