@@ -4,6 +4,20 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { formatDistanceToNow } from "date-fns"
+import useSound from 'use-sound'
+
+interface Conversation {
+  id: string
+  otherUser: {
+    name: string
+    image?: string
+  }
+  lastMessage?: {
+    content: string
+  }
+  updatedAt: string
+  unreadCount: number
+}
 
 export default function ConversationList({
   activeConversationId,
@@ -11,9 +25,12 @@ export default function ConversationList({
   unreadCounts,
   updateUnreadCount,
 }) {
-  const [conversations, setConversations] = useState([])
+  const [conversations, setConversations] = useState<Conversation[]>([])
   const [loading, setLoading] = useState(true)
-  const lastUpdateRef = useRef(null)
+  const lastUpdateRef = useRef<string | null>(null)
+
+  // Notification sound
+  const [play] = useSound('/blipp.mp3')
 
   // Fetch conversations function that can be reused
   const fetchConversations = useCallback(
@@ -24,18 +41,34 @@ export default function ConversationList({
         }
 
         const response = await fetch("/api/conversations")
-        const data = await response.json()
+        const data: Conversation[] = await response.json()
 
         // Check if there are any changes before updating state
         const currentJson = JSON.stringify(data)
         if (!lastUpdateRef.current || lastUpdateRef.current !== currentJson) {
           setConversations(data)
 
+          let shouldPlaySound = false
+
           // Initialize unread counts
-          data.forEach((conversation) => {
+          data.forEach((conversation: Conversation) => {
+            const previous = conversations.find((c: Conversation) => c.id === conversation.id)
+            if (
+              previous &&
+              conversation.unreadCount > previous.unreadCount
+            ) {
+              shouldPlaySound = true
+            }
+
+            // Update unread count regardless
             updateUnreadCount(conversation.id, conversation.unreadCount)
           })
 
+          if (shouldPlaySound) {
+            play()
+          }
+
+          setConversations(data)
           lastUpdateRef.current = currentJson
         }
 
@@ -49,7 +82,7 @@ export default function ConversationList({
         }
       }
     },
-    [updateUnreadCount],
+    [updateUnreadCount, play],
   )
 
   // Initial load
