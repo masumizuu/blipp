@@ -99,7 +99,7 @@ export default function ChatLayout() {
                 <User className="h-5 w-5" />
               </Button>
               <ThemeToggle />
-              <Button variant="ghost" size="icon" onClick={() => signOut({ callbackUrl: "/login" })}>
+              <Button variant="ghost" size="icon" onClick={() => signOut({ callbackUrl: "/" })}>
                 <LogOut className="h-5 w-5" />
               </Button>
             </div>
