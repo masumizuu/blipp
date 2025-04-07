@@ -8,8 +8,6 @@ import { v4 as uuidv4 } from "uuid"
 
 //cloudinary upload
 import { v2 as cloudinary } from 'cloudinary';
-import formidable from 'formidable';
-import fs from 'fs';
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
@@ -17,23 +15,33 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET!,
 });
 
-export const POST = async (req: Request) => {
-  const form = formidable({ keepExtensions: true });
+export async function POST(req: Request) {
+  try {
+    const formData = await req.formData();
+    const file = formData.get("image") as File;
 
-  const data: any = await new Promise((resolve, reject) => {
-    form.parse(req as any, (err, fields, files) => {
-      if (err) reject(err);
-      resolve({ fields, files });
+    if (!file) {
+      return NextResponse.json({ error: "No image file found" }, { status: 400 });
+    }
+
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    const result = await new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream({ folder: "blipp_uploads" }, (error, result) => {
+          if (error) return reject(error);
+          resolve(result);
+        })
+        .end(buffer);
     });
-  });
 
-  const file = data.files.image;
-  const result = await cloudinary.uploader.upload(file.filepath, {
-    folder: 'blipp_uploads',
-  });
-
-  return NextResponse.json({ url: result.secure_url });
-};
+    return NextResponse.json({ url: (result as any).secure_url });
+  } catch (err) {
+    console.error("Upload error:", err);
+    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
+  }
+}
 
 // const prisma = new PrismaClient()
 

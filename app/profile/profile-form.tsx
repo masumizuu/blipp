@@ -51,29 +51,20 @@ export default function ProfileForm({ user }) {
     // Upload the image
     setIsUploading(true)
     setError("")
-
+    
     try {
-      const formData = new FormData()
-      formData.append("image", file)
-
-      const response = await fetch("/api/user/upload-image", {
-        method: "POST",
-        body: formData,
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to upload image")
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const base64String = reader.result as string
+        setImage(base64String) // This gets sent in the PUT request later
+        setSuccess("Image ready to upload")
+        setTimeout(() => setSuccess(""), 3000)
+        setIsUploading(false)
       }
-
-      setImage(data.imageUrl)
-      setSuccess("Image uploaded successfully")
-      setTimeout(() => setSuccess(""), 3000)
+      reader.readAsDataURL(file)
     } catch (error) {
-      setError(error.message || "Error uploading image")
+      setError("Failed to process image")
       setPreviewImage(user?.image || "")
-    } finally {
       setIsUploading(false)
     }
   }
