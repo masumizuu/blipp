@@ -55,7 +55,7 @@ export default function UpdateProfileForm() {
         base64Image = reader.result
 
         const res = await fetch('/api/user/update-profile', {
-          method: 'PUT',
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
