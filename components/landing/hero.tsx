@@ -89,15 +89,6 @@ export default function LandingHero() {
             transition={{ duration: 0.2 * animationSpeed }}
           >
             <div className="flex flex-col space-y-4 px-4">
-              <Link href="/features" className="text-foreground/80 hover:text-primary transition-colors py-2">
-                Features
-              </Link>
-              <Link href="/pricing" className="text-foreground/80 hover:text-primary transition-colors py-2">
-                Pricing
-              </Link>
-              <Link href="/about" className="text-foreground/80 hover:text-primary transition-colors py-2">
-                About
-              </Link>
               <Link href="/login" className="py-2">
                 <Button variant="ghost" className="w-full">
                   Login
@@ -156,7 +147,7 @@ export default function LandingHero() {
               style={{ animationDuration: `${4 / animationSpeed}s` }}
             >
               <Image
-                src="/placeholder.svg?height=600&width=600"
+                src="/blippUI.png"
                 alt="Chat App Interface"
                 width={600}
                 height={600}
