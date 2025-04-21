@@ -17,10 +17,10 @@ export default function LandingPage() {
       <FeatureSection />
 
       {/* Statistics Section */}
-      {/* <StatisticsSection /> */}
+      <StatisticsSection />
 
       {/* Testimonial Section */}
-      {/* <TestimonialSection /> */}
+      <TestimonialSection />
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary/90 to-primary text-white">
